@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bus Routes - Q1</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+</head>
+
+<body>
+
+<!-- Top Navbar -->
+<div class="top-navbar">
+    <a href="website.html" class="top-btn">Home</a>
+    <a href="https://www.mta.info/maps" class="top-btn">Maps</a>
+    <a href="https://www.mta.info/alerts" class="top-btn">Service Changes</a>
+    <a href="https://www.mta.info/contact-us" class="top-btn">Contact</a>
+</div>
+
+<!-- Modal for Bus Routes -->
+<div id="bus-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="map-label">Q1</div>
+        <div class="direction-buttons">
+            <button id="north-btn">Northbound</button>
+            <span></span>
+            <button id="south-btn">Southbound</button>
+        </div>
+        <div id="bus-map"></div>
+    </div>
+</div>
+
+<!-- Banner + Bottom Navbar -->
+<div class="black-section">
+    <div class="banner">
+        <img src="images/20260303_164552.jpg" alt="Bus Banner">
+        <canvas id="weather-canvas"></canvas>
+    </div>
+
+    <div class="bottom-navbar">
+        <div class="nav-buttons">
+            <a href="website.html"><button>Subway</button></a>
+            <a href="bus.html"><button>Bus</button></a>
+            <a href="#"><button>Railroad</button></a>
+        </div>
+
+        <div class="nav-info">
+            <div class="weather-box">
+                <span id="weather-icon">☀️</span>
+                <span id="weather-f">--°F</span>
+                <span id="weather-c">--°C</span>
+            </div>
+
+            <span class="divider">|</span>
+
+            <span id="nyc-time">--:--</span>
+        </div>
+    </div>
+</div>
+
+<!-- Service Ticker -->
+<div class="service-ticker">
+    <div class="ticker-text">
+        ⚠ No major bus service disruptions • Welcome to the NYC Bus Dashboard •
+    </div>
+</div>
+
+<!-- Bus Input -->
+<div id="bus-bar">
+    <label for="bus-route">Enter Bus Route</label>
+    <input id="bus-route" type="text" placeholder="ex. Q1, Bx12, M15">
+</div>
+
+<script>
+// --- Bus Map & Modal ---
+const busRoutes = {
+    "Q1": {
+        northbound:[[40.700992,-73.807842],[40.705609,-73.809628],[40.707799,-73.802542],[40.712552,-73.784222],[40.715664,-73.773854],[40.719359,-73.775628],[40.721265,-73.776544],[40.723543,-73.778172],[40.726116,-73.779698],[40.729485,-73.781276],[40.732966,-73.782915],[40.734067,-73.780146],[40.735111,-73.776692],[40.736371,-73.772484],[40.737963,-73.767635],[40.739242,-73.763268],[40.740951,-73.757905],[40.743439,-73.753917],[40.744289,-73.751042],[40.745058,-73.748355],[40.746330,-73.746153]],
+        southbound:[[40.746330,-73.746153],[40.745889,-73.749087],[40.744225,-73.751557],[40.742315,-73.753888],[40.740755,-73.758674],[40.739105,-73.763994],[40.737424,-73.769245],[40.736387,-73.772603],[40.735068,-73.777081],[40.733965,-73.780649],[40.732839,-73.782913],[40.732809,-73.782928],[40.729382,-73.781311],[40.722750,-73.777746],[40.718179,-73.775084],[40.714857,-73.774660],[40.712768,-73.783391],[40.707614,-73.803218],[40.705275,-73.809494],[40.700992,-73.807842]]
+    }
+};
+
+const busInput = document.getElementById('bus-route');
+const busModal = document.getElementById('bus-modal');
+const closeBtn = busModal.querySelector('.close');
+const northBtn = document.getElementById('north-btn');
+const southBtn = document.getElementById('south-btn');
+let map, routeControl;
+
+function initMap() {
+    map = L.map('bus-map').setView([40.733,-73.78],13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+        attribution:'&copy; OpenStreetMap contributors'
+    }).addTo(map);
+}
+
+function drawRoute(stops){
+    if(routeControl) map.removeControl(routeControl);
+    const waypoints = stops.map(c=>L.latLng(c[0],c[1]));
+    const plan = L.Routing.plan(waypoints,{
+        createMarker:(i,wp,nWps)=>L.circleMarker(wp.latLng,{radius:6,color:'purple',fillColor:'purple',fillOpacity:1}),
+        addWaypoints:false, draggableWaypoints:false, routeWhileDragging:false, show:false
+    });
+    routeControl = L.Routing.control({
+        plan:plan, lineOptions:{styles:[{color:'purple',weight:5}]},
+        addWaypoints:false, draggableWaypoints:false, routeWhileDragging:false, show:false
+    }).addTo(map);
+}
+
+function showBusRoute(routeName){
+    const route = busRoutes[routeName.trim().toUpperCase()];
+    if(!route) return alert("Route not found!");
+    busModal.style.display='block'; busModal.classList.add('show');
+    if(!map) initMap();
+    setTimeout(()=>{ map.invalidateSize(); drawRoute(route.northbound); },100);
+    northBtn.onclick = ()=>drawRoute(route.northbound);
+    southBtn.onclick = ()=>drawRoute(route.southbound);
+}
+
+// Enter key
+busInput.addEventListener('keydown', e=>{ if(e.key==='Enter') showBusRoute(busInput.value); });
+
+// Close modal
+closeBtn.addEventListener('click', ()=>{ busModal.style.display='none'; busModal.classList.remove('show'); });
+window.addEventListener('click', e=>{ if(e.target===busModal){ busModal.style.display='none'; busModal.classList.remove('show'); } });
+
+// NYC Time
+function updateNYCTime(){
+    const now = new Date();
+    const options={timeZone:"America/New_York",hour:"2-digit",minute:"2-digit"};
+    const time = new Intl.DateTimeFormat("en-US",options).format(now);
+    document.getElementById("nyc-time").textContent = time;
+}
+updateNYCTime();
+setInterval(updateNYCTime,1000);
+
+// NYC Weather
+async function updateWeather(){
+    try{
+        const res = await fetch(
+            "https://api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.0060&current_weather=true&temperature_unit=fahrenheit&weathercode=true"
+        );
+        const data = await res.json();
+
+        const f = Math.round(data.current_weather.temperature);
+        const c = Math.round((f - 32) * 5/9);
+
+        document.getElementById("weather-f").textContent = f + "°F";
+        document.getElementById("weather-c").textContent = c + "°C";
+
+        const code = data.current_weather.weathercode;
+        let icon = "☀️";
+        if([1,2,3].includes(code)) icon="⛅";
+        else if([61,63,65].includes(code)) icon="🌧️";
+        else if([71,73,75].includes(code)) icon="❄️";
+        else if([95,96,99].includes(code)) icon="⛈️";
+        else if(code===0) icon="☀️";
+        else icon="🌤️";
+
+        document.getElementById("weather-icon").textContent = icon;
+
+    }catch{
+        document.getElementById("weather-f").textContent="--°F";
+        document.getElementById("weather-c").textContent="--°C";
+        document.getElementById("weather-icon").textContent="❔";
+    }
+}
+updateWeather();
+setInterval(updateWeather,600000);
+
+// Night Mode
+const hour = new Date().getHours();
+if(hour >= 19 || hour < 6) document.body.classList.add("night");
+</script>
+
+</body>
+</html>

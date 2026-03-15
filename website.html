@@ -1,58 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subway Cars</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
-   
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subway Cars</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Top Navbar -->
 <div class="top-navbar">
     <a href="website.html" class="top-btn">Home</a>
     <a href="https://www.mta.info/maps" class="top-btn">Maps</a>
     <a href="https://www.mta.info/alerts" class="top-btn">Service Changes</a>
     <a href="https://www.mta.info/contact-us" class="top-btn">Contact</a>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body"></div>
+    </div>
+</div>
+
+<!-- Banner + Bottom Navbar -->
+<div class="black-section">
+
+    <div class="banner">
+        <img src="images/20250608_170301.jpg" alt="Banner">
+        <canvas id="weather-canvas"></canvas>
     </div>
 
-    <div class="black-section">
-     <div class="banner">
-        <input type="image" src="images/20260303_164552.jpg" alt="Banner">
+    <div class="bottom-navbar">
+
+        <div class="nav-buttons">
+            <a href="website.html"><button>Subway</button></a>
+            <a href="bus.html"><button>Bus</button></a>
+            <a href=""><button>Railroad</button></a>
+        </div>
+
+        <div class="nav-info">
+
+            <div class="weather-box">
+                <span id="weather-icon">☀️</span>
+                <span id="weather-f">--°F</span>
+                <span id="weather-c">--°C</span>
+            </div>
+
+            <span class="divider">|</span>
+
+            <span id="nyc-time">--:--</span>
+
+        </div>
+
     </div>
-<div class="bottom-navbar">
-    <a href="website.html"><button>Subway</button></a>
-    <a href="bus.html"><button>Bus</button></a>
-    <a href=""><button>Railroad</button></a>
+</div>
+
+<div class="service-ticker">
+    <div class="ticker-text">
+        ⚠ No major service disruptions • Welcome to the NYC Subway Dashboard •
     </div>
+</div>
+
+<!-- Train Status Board -->
+<div class="status-board">
+
+    <!-- Good Service -->
+    <div class="service-section full">
+        <h2 class="status good">Good Service</h2>
+        <div class="train-bar">
+            <a href="#" class="train-btn" id="train-1"><img src="images/resized.png" alt="1"></a>
+            <a href="2.html" class="train-btn"><img src="images/2train.png" alt="2"></a>
+            <a href="3.html" class="train-btn"><img src="images/3train.png" alt="3"></a>
+            <a href="4.html" class="train-btn"><img src="images/4train.png" alt="4"></a>
+            <a href="5.html" class="train-btn"><img src="images/5train.png" alt="5"></a>
+            <a href="6.html" class="train-btn"><img src="images/6train.png" alt="6"></a>
+            <a href="7.html" class="train-btn"><img src="images/7train.png" alt="7"></a>
+            <a href="11.html" class="train-btn"><img src="images/11train.png" alt="11"></a>
+
+            <a href="a.html" class="train-btn"><img src="images/Atrain.png" alt="A"></a>
+            <a href="b.html" class="train-btn"><img src="images/Btrain.png" alt="B"></a>
+            <a href="c.html" class="train-btn"><img src="images/Ctrain.png" alt="C"></a>
+            <a href="d.html" class="train-btn"><img src="images/Dtrain.png" alt="D"></a>
+            <a href="e.html" class="train-btn"><img src="images/Etrain.png" alt="E"></a>
+            <a href="f.html" class="train-btn"><img src="images/Ftrain.png" alt="F"></a>
+            <a href="g.html" class="train-btn"><img src="images/Gtrain.png" alt="G"></a>
+            <a href="j.html" class="train-btn"><img src="images/Jtrain.png" alt="J"></a>
+            <a href="l.html" class="train-btn"><img src="images/Ltrain.png" alt="L"></a>
+            <a href="m.html" class="train-btn"><img src="images/Mtrain.png" alt="M"></a>
+            <a href="n.html" class="train-btn"><img src="images/Ntrain.png" alt="N"></a>
+            <a href="q.html" class="train-btn"><img src="images/Qtrain.png" alt="Q"></a>
+            <a href="r.html" class="train-btn"><img src="images/Rtrain.png" alt="R"></a>
+            <a href="s.html" class="train-btn"><img src="images/Strain.png" alt="S"></a>
+            <a href="sf.html" class="train-btn"><img src="images/SFtrain.png" alt="SF"></a>
+            <a href="w.html" class="train-btn"><img src="images/Wtrain.png" alt="W"></a>
+            <a href="x.html" class="train-btn"><img src="images/Xtrain.png" alt="X"></a>
+            <a href="z.html" class="train-btn"><img src="images/Ztrain.png" alt="Z"></a>
+        </div>
     </div>
 
-<div class="train-bar">
+    <!-- Delays + Reroutes -->
+    <div class="bottom-row">
 
-<a href="1.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/NYCS-bull-trans-1-Std.svg/1920px-NYCS-bull-trans-1-Std.svg.png" alt="1"></a>
-<a href="2.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/NYCS-bull-trans-2-Std.svg/1920px-NYCS-bull-trans-2-Std.svg.png" alt="2"></a>
-<a href="3.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/NYCS-bull-trans-3-Std.svg/1920px-NYCS-bull-trans-3-Std.svg.png" alt="3"></a>
-<a href="4.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/NYCS-bull-trans-4-Std.svg/1920px-NYCS-bull-trans-4-Std.svg.png" alt="4"></a>
-<a href="5.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/NYCS-bull-trans-5-Std.svg/1920px-NYCS-bull-trans-5-Std.svg.png" alt="5"></a>
-<a href="6.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/NYCS-bull-trans-6-Std.svg/1920px-NYCS-bull-trans-6-Std.svg.png" alt="6"></a>
-<a href="7.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/NYCS-bull-trans-7-Std.svg/1920px-NYCS-bull-trans-7-Std.svg.png" alt="7"></a>
-<a href="a.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/NYCS-bull-trans-A-Std.svg/1920px-NYCS-bull-trans-A-Std.svg.png" alt="A"></a>
-<a href="b.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/NYCS-bull-trans-B-Std.svg/1920px-NYCS-bull-trans-B-Std.svg.png" alt="B"></a>
-<a href="c.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/NYCS-bull-trans-C-Std.svg/1920px-NYCS-bull-trans-C-Std.svg.png" alt="C"></a>
-<a href="d.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/NYCS-bull-trans-D-Std.svg/1920px-NYCS-bull-trans-D-Std.svg.png" alt="D"></a>
-<a href="e.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYCS-bull-trans-E-Std.svg/1920px-NYCS-bull-trans-E-Std.svg.png" alt="E"></a>
-<a href="f.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/NYCS-bull-trans-F-Std.svg/1920px-NYCS-bull-trans-F-Std.svg.png" alt="F"></a>
-<a href="g.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/NYCS-bull-trans-G-Std.svg/1920px-NYCS-bull-trans-G-Std.svg.png" alt="G"></a>
-<a href="j.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/NYCS-bull-trans-J-Std.svg/1920px-NYCS-bull-trans-J-Std.svg.png" alt="J"></a>
-<a href="l.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/NYCS-bull-trans-L-Std.svg/1920px-NYCS-bull-trans-L-Std.svg.png" alt="L"></a>
-<a href="m.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/NYCS-bull-trans-M-Std.svg/1920px-NYCS-bull-trans-M-Std.svg.png" alt="M"></a>
-<a href="n.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/NYCS-bull-trans-N-Std.svg/1920px-NYCS-bull-trans-N-Std.svg.png" alt="N"></a>
-<a href="q.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/NYCS-bull-trans-Q-Std.svg/1920px-NYCS-bull-trans-Q-Std.svg.png" alt="Q"></a>
-<a href="r.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/NYCS-bull-trans-R-Std.svg/1920px-NYCS-bull-trans-R-Std.svg.png" alt="R"></a>
-<a href="w.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/NYCS-bull-trans-W-Std.svg/1920px-NYCS-bull-trans-W-Std.svg.png" alt="W"></a>
-<a href="s.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/NYCS-bull-trans-S-Std.svg/1920px-NYCS-bull-trans-S-Std.svg.png" alt="S"></a>
-<a href="sr.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/NYCS-bull-trans-SR-Std.svg/1920px-NYCS-bull-trans-SR-Std.svg.png" alt="SR"></a>
-<a href="sf.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/NYCS-bull-trans-SF-Std.svg/1920px-NYCS-bull-trans-SF-Std.svg.png" alt="SF"></a>
-<a href="z.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/NYCS-bull-trans-Z-Std.svg/1920px-NYCS-bull-trans-Z-Std.svg.png" alt="Z"></a>
-<a href="sir.html" class="train-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/NYCS-bull-trans-SIR-Std.svg/1920px-NYCS-bull-trans-SIR-Std.svg.png" alt="SIR"></a>
+        <div class="service-section">
+            <h2 class="status delay">Delays</h2>
+            <div class="train-bar"></div>
+        </div>
+
+        <div class="service-section">
+            <h2 class="status reroute">Reroutes</h2>
+            <div class="train-bar"></div>
+        </div>
+
+    </div>
 
 </div>
-</html> 
+
+<!-- Scripts -->
+<script>
+document.querySelectorAll('.service-section').forEach(section => {
+    const trainBar = section.querySelector('.train-bar');
+    if(!trainBar || trainBar.children.length === 0){
+        section.style.display = 'none';
+    } else {
+        section.style.display = 'block';
+    }
+});
+</script>
+
+<script>
+// NYC Time
+function updateNYCTime(){
+    const now = new Date();
+    const options={timeZone:"America/New_York",hour:"2-digit",minute:"2-digit"};
+    const time = new Intl.DateTimeFormat("en-US",options).format(now);
+    document.getElementById("nyc-time").textContent = time;
+}
+updateNYCTime();
+setInterval(updateNYCTime,1000);
+
+// NYC Weather
+async function updateWeather(){
+    try{
+        const res = await fetch(
+            "https://api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.0060&current_weather=true&temperature_unit=fahrenheit&weathercode=true"
+        );
+        const data = await res.json();
+
+        const f = Math.round(data.current_weather.temperature);
+        const c = Math.round((f - 32) * 5/9);
+
+        document.getElementById("weather-f").textContent = f + "°F";
+        document.getElementById("weather-c").textContent = c + "°C";
+
+        const code = data.current_weather.weathercode;
+        let icon = "☀️";
+        if([1,2,3].includes(code)) icon="⛅";
+        else if([61,63,65].includes(code)) icon="🌧️";
+        else if([71,73,75].includes(code)) icon="❄️";
+        else if([95,96,99].includes(code)) icon="⛈️";
+        else if(code===0) icon="☀️";
+        else icon="🌤️";
+
+        document.getElementById("weather-icon").textContent = icon;
+
+    }catch{
+        document.getElementById("weather-f").textContent="--°F";
+        document.getElementById("weather-c").textContent="--°C";
+        document.getElementById("weather-icon").textContent="❔";
+    }
+}
+updateWeather();
+setInterval(updateWeather,600000);
+
+// Night Mode
+const hour = new Date().getHours();
+if(hour >= 19 || hour < 6) document.body.classList.add("night");
+
+const canvas = document.getElementById("weather-canvas");
+const ctx = canvas.getContext("2d");
+let particles = [];
+
+function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function createParticles(type){
+    particles = [];
+    const count = type === 'snow' ? 80 : 60;
+    for(let i=0;i<count;i++){
+        particles.push({
+            x: Math.random()*canvas.width,
+            y: Math.random()*canvas.height,
+            size: Math.random()*3+2,
+            speedY: Math.random()*2+1,
+            speedX: type==='rain'? Math.random()*2+2 : Math.random()*0.5-0.25
+        });
+    }
+}
+
+function animateParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+        ctx.fillStyle = 'rgba(255,255,255,0.8)';
+        ctx.beginPath();
+        if(p.speedX>1) ctx.fillRect(p.x,p.y,2,p.size*5);
+        else ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fill();
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if(p.y > canvas.height) p.y = -10;
+        if(p.x > canvas.width) p.x = 0;
+        if(p.x < 0) p.x = canvas.width;
+    });
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+function updateWeatherParticles(code){
+    if([61,63,65].includes(code)) createParticles('rain');
+    else if([71,73,75].includes(code)) createParticles('snow');
+    else particles = []; // clear for sun/cloud
+}
+</script>
+
+<!-- Hidden Subway Panel Modal for (1) Train -->
+<div id="subway-modal-1" class="subway-modal">
+    <div class="subway-modal-content">
+        <span class="close">&times;</span>
+
+        <!-- Header: Logo + Service -->
+        <div class="modal-header">
+            <img src="images/resized.png" alt="1 Logo" class="modal-logo">
+            <span class="modal-status">Good Service</span>
+        </div>
+
+        <!-- Separator -->
+        <hr class="modal-separator">
+
+        <!-- Station List -->
+        <div id="station-list-1">
+            <div class="station-item"><button>South Ferry-Whitehall Street ♿</button></div>
+            <div class="station-item"><button>Rector Street</button></div>
+            <div class="station-item"><button>World Trade Center ♿</button></div>
+            <div class="station-item"><button>Chambers Street ♿</button></div>
+            <div class="station-item"><button>Franklin Street</button></div>
+            <div class="station-item"><button>Canal Street</button></div>
+            <div class="station-item"><button>Houston Street</button></div>
+            <div class="station-item"><button>Christopher Street - Sheridan Square</button></div>
+            <div class="station-item"><button>14th Street - East Chelsea ♿</button></div>
+            <div class="station-item">18th Street</div>
+            <div class="station-item">23rd Street</div>
+            <div class="station-item">28th Street</div>
+            <div class="station-item">34th Street - Penn Station</div>
+            <div class="station-item">Times Square - 42nd Street</div>
+            <div class="station-item">50th Street</div>
+            <div class="station-item">59th Street - Columbus Circle</div>
+            <div class="station-item">66th Street - Lincoln Center</div>
+            <div class="station-item">72nd Street</div>
+            <div class="station-item">79th Street</div>
+            <div class="station-item">86th Street</div>
+            <div class="station-item">96th Street</div>
+            <div class="station-item">103rd Street</div>
+            <div class="station-item">110th Street - Cathedral Parkway</div>
+            <div class="station-item">116th Street - Columbia University</div>
+            <div class="station-item">125th Street - Broadway</div>
+            <div class="station-item">137th Street - City College</div>
+            <div class="station-item">145th Street</div>
+            <div class="station-item">157th Street</div>
+            <div class="station-item">168th Street</div>
+            <div class="station-item">181st Street</div>
+            <div class="station-item">191st Street</div>
+            <div class="station-item">Dyckman Street</div>
+            <div class="station-item">207th Street</div>
+            <div class="station-item">215th Street</div>
+            <div class="station-item">Marble Hill-225th Street</div>
+            <div class="station-item">231st Street</div>
+            <div class="station-item">238th Street</div>
+            <div class="station-item">Van Cortlandt Park-242nd Street</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Get the modal and button
+const modal1 = document.getElementById("subway-modal-1");
+const train1Btn = document.getElementById("train-1");
+const close1 = modal1.querySelector(".close");
+
+// Open modal on click
+train1Btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    modal1.style.display = "block";
+});
+
+// Close modal on X
+close1.addEventListener("click", () => {
+    modal1.style.display = "none";
+});
+
+// Close modal on clicking outside content
+window.addEventListener("click", (e) => {
+    if (e.target === modal1) modal1.style.display = "none";
+});
+</script>
+
+</body>
+</html>
